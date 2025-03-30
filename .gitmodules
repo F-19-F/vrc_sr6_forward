@@ -1,0 +1,9 @@
+[submodule "json"]
+	path = json
+	url = https://github.com/nlohmann/json
+[submodule "asio"]
+	path = asio
+	url = https://github.com/chriskohlhoff/asio
+[submodule "websocketpp"]
+	path = websocketpp
+	url = https://github.com/amini-allight/websocketpp
