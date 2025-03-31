@@ -50,8 +50,19 @@ void udp_listener(unsigned short port) {
         std::string message = data.dump();
 
         // 发送给所有连接的WebSocket客户端
-        for (auto& hdl : connections) {
-            ws_server.send(hdl, message, websocketpp::frame::opcode::text);
+        for (auto it = connections.begin(); it != connections.end();) {
+            auto &hdl = *it;
+            try
+            {
+                ws_server.send(hdl, message, websocketpp::frame::opcode::text);
+                ++it;
+            }
+            catch (const std::exception&)
+            {
+                ws_server.close(hdl, websocketpp::close::status::normal, "Closing connection");
+                //connections.erase(it);
+            }
+            
         }
     }
 }
