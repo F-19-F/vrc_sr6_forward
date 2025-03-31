@@ -68,6 +68,10 @@ int main() {
     ws_server.set_close_handler([](connection_hdl hdl) {
         connections.erase(hdl);
         });
+    
+    ws_server.clear_access_channels(websocketpp::log::alevel::all);
+    ws_server.clear_error_channels(websocketpp::log::elevel::all);
+    ws_server.set_access_channels(websocketpp::log::alevel::connect);
 
     ws_server.listen(8000);
     ws_server.start_accept();
